@@ -3,3 +3,4 @@
 - Sam Espinoza
 - Seth Hoskins
 - Travis Russell
+- Nikki Liu
