@@ -2,3 +2,4 @@
 ## Team Members
 - Sam Espinoza
 - Seth Hoskins
+- Travis Russell
