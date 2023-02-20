@@ -26,3 +26,9 @@ samples, guidance on mobile development, and a full API reference.
 ## Requirements
 
 ## Features
+
+## Documentation
+
+Database ERD
+
+![Database entity relationship diagram](documentation/ERD.png?raw=true "Database ERD")
