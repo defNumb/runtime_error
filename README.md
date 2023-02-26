@@ -25,6 +25,35 @@ samples, guidance on mobile development, and a full API reference.
 
 ## Requirements
 
+This tutorial has good instructions on how to install Flutter on Windows, Mac, and Linux. It also has instructions on how to install Android Studio and VS Code.
+- [How to install Flutter SDK and Android Studio](https://www.liquidweb.com/kb/how-to-install-and-configure-flutter-sdk-windows-10/)
+Make sure to follow the instructions for the Flutter SDK, Android Studio, and VS Code, and to set up the enviroment variable for the Flutter SDK, so you can run the `flutter` command in the terminal.
+
+Step1: Install Flutter
+- [Flutter SDK](https://flutter.dev/docs/get-started/install)
+
+Step2: Install Android Studio
+- [Android SDK](https://developer.android.com/studio)
+
+       You don't need to create an Android Virtual Device (AVD) for this project, but you will need to install the Android SDK.
+        
+Step3: Install VS Code
+- [VS Code Installation Kit](https://code.visualstudio.com/download)
+
+        Within VS Code, install the following extensions:
+        - Dart
+        - Flutter
+        - bloc
+        - Awesome Flutter Snippets
+        - Error Lens
+        - dart-import
+        - DotENV
+        - vscode-icons
+       
+In order to connect the project to the database (Firebase), you will need to install the following:
+- [Firebase CLI](https://firebase.google.com/docs/cli)
+
+
 ## Features
 
 ## Documentation
