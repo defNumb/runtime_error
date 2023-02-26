@@ -16,6 +16,29 @@ class _HomePageState extends State<HomePage> {
         title: const Center(
           child: Text('Home Page'),
         ),
+        // actions with 3 buttons to visit the profile page, pet dictionary page,and favorite pets page
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.person),
+          ),
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.pets),
+          ),
+          IconButton(
+            onPressed: () {
+              Navigator.pushNamed(context, '/favorite_pets');
+            },
+            icon: const Icon(Icons.favorite),
+          ),
+          IconButton(
+            onPressed: () {
+              Navigator.pushNamed(context, '/favorite_pets');
+            },
+            icon: const Icon(Icons.book),
+          ),
+        ],
       ),
       body: Column(
         children: [
@@ -25,23 +48,6 @@ class _HomePageState extends State<HomePage> {
           // 3rd button is to visit the favorite pets page
           const SizedBox(
             height: 50,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              ElevatedButton(
-                onPressed: () {},
-                child: const Text('Profile'),
-              ),
-              ElevatedButton(
-                onPressed: () {},
-                child: const Text('Pet Dictionary'),
-              ),
-              ElevatedButton(
-                onPressed: () {},
-                child: const Text('Favorite Pets'),
-              ),
-            ],
           ),
           const Center(
             child: Text('Home Page'),
