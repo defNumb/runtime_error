@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_pets_app/screens/splash_screen.dart';
 
 import 'screens/pet_favorites.dart';
+import 'screens/signin_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -27,6 +28,7 @@ class MyApp extends StatelessWidget {
       // routes
       routes: {
         '/favorite_pets': (context) => const PetFavoritesPage(),
+        '/signin_page': (context) => const SigninPage(),
       },
     );
   }
