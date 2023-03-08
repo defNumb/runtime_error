@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_pets_app/constants/app_constants.dart';
 
 class HomePage extends StatefulWidget {
+  static const String routeName = '/home_page';
   const HomePage({super.key});
 
   @override
