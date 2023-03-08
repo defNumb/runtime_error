@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_pets_app/constants/app_constants.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -11,7 +12,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.amber,
+      backgroundColor: primaryColor,
       appBar: AppBar(
         title: const Center(
           child: Text('Home Page'),
@@ -33,26 +34,20 @@ class _HomePageState extends State<HomePage> {
             icon: const Icon(Icons.favorite),
           ),
           IconButton(
-            onPressed: () {
-              Navigator.pushNamed(context, '/favorite_pets');
-            },
+            onPressed: () {},
             icon: const Icon(Icons.book),
           ),
         ],
       ),
       body: Column(
         children: [
-          // Row with 3 buttons
-          // 1st button is to visit the profile page
-          // 2nd button is to visist the pet dictionary page
-          // 3rd button is to visit the favorite pets page
           const SizedBox(
             height: 50,
           ),
           const Center(
             child: Text('Home Page'),
           ),
-          const SizedBox(height: 500),
+
           // sign out green button
           ElevatedButton(
             style: ElevatedButton.styleFrom(

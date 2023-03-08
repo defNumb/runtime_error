@@ -25,7 +25,7 @@ class _SplashScreenState extends State<SplashScreen> {
     if (status == true) {
       return const HomePage();
     } else if (status == false) {
-      return const SignupPage();
+      return const SigninPage();
     }
     return const CircularProgressIndicator();
   }
