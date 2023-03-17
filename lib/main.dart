@@ -4,7 +4,10 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_pets_app/blocs/Auth/auth_bloc.dart';
+import 'package:my_pets_app/blocs/signin/signin_cubit.dart';
+import 'package:my_pets_app/blocs/signup/signup_cubit.dart';
 import 'package:my_pets_app/screens/home_page.dart';
+import 'package:my_pets_app/screens/signup_page.dart';
 import 'package:my_pets_app/screens/splash_screen.dart';
 
 import 'firebase_options.dart';
@@ -41,6 +44,16 @@ class MyApp extends StatelessWidget {
               authRepository: context.read<AuthRepository>(),
             ),
           ),
+          BlocProvider<SigninCubit>(
+            create: (context) => SigninCubit(
+              authRepository: context.read<AuthRepository>(),
+            ),
+          ),
+          BlocProvider<SignupCubit>(
+            create: (context) => SignupCubit(
+              authRepository: context.read<AuthRepository>(),
+            ),
+          ),
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
@@ -54,6 +67,7 @@ class MyApp extends StatelessWidget {
             PetFavoritesPage.routeName: (context) => const PetFavoritesPage(),
             SigninPage.routeName: (context) => const SigninPage(),
             HomePage.routeName: (context) => const HomePage(),
+            SignupPage.routeName: (context) => const SignupPage(),
           },
         ),
       ),
