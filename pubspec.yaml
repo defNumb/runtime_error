@@ -18,11 +18,15 @@ dependencies:
   cloud_firestore: ^4.4.4
   flutter_bloc: ^8.1.2
   equatable: ^2.0.5
+  validators: ^3.0.0
+  envied: ^0.3.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
+  envied_generator: ^0.3.0
+  build_runner: ^2.3.3
+  
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your
