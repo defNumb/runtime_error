@@ -16,18 +16,25 @@ class DogApiRepository {
   Future<List<DogBreed>> getDogBreeds() async {
     try {
       // create a variable of type var called client = http.Client();
+
+      var client = http.Client();
       // create a variable of type var called headers = {'x-api-key': Env.dogApiKey};
+      var headers = {'x-api-key': Env.dogApiKey};
       // create a variable of type var called url = Uri.parse('https://api.thedogapi.com/v1/breeds');
+      var url = Uri.parse('https://api.thedogapi.com/v1/breeds');
       // create a variable of type var called response = await client.get(url, headers: headers);
+      var response = await client.get(url, headers: headers);
       // create if block to check if status code is 200- DONE
-      // if (response.statusCode == 200) {
-      //   create a List<DogBreed> named dogBreeds and assign it to [];
-      //   create a variable of type var named jsonString and assign it to jsonDecode(response.body);
-      //   for (var item in jsonString) {
-      //     DogBreeds.add(DogBreed.fromJson(item));
-      //   }
-      //   return dogBreeds;
-      // }
+      if (response.statusCode == 200) {
+        //   create a List<DogBreed> named dogBreeds and assign it to [];
+        List<DogBreed> dogBreeds = [];
+        //   create a variable of type var named jsonString and assign it to jsonDecode(response.body);
+        var jsonString = jsonDecode(response.body);
+        for (var item in jsonString) {
+          dogBreeds.add(DogBreed.fromJson(item));
+        }
+        return dogBreeds;
+      }
     } on Exception catch (e) {
       throw CustomError(
           code: 'Exception',
