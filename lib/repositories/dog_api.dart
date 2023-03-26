@@ -16,6 +16,7 @@ class DogApiRepository {
   Future<List<DogBreed>> getDogBreeds() async {
     try {
       // create a variable of type var called client = http.Client();
+
       var client = http.Client();
       // create a variable of type var called headers = {'x-api-key': Env.dogApiKey};
       var headers = {'x-api-key': Env.dogApiKey};
