@@ -15,6 +15,7 @@ class CatApiRepository {
   Future<List<CatBreed>> getCatBreeds() async {
     try {
       // create a variable of type var called client = http.Client();
+      var client = http.Client();
       // create a variable of type var called headers = {'x-api-key': Env.catApiKey};
       // create a variable of type var called url = Uri.parse('https://api.thecatapi.com/v1/breeds');
       // create a variable of type var called response = await client.get(url, headers: headers);
