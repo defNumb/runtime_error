@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 class DogBreed {
   DogBreed({
     this.altNames,
@@ -17,6 +19,8 @@ class DogBreed {
     this.temperament,
     this.weightImperial,
     this.wikipediaUrl,
+    this.image,
+    this.description,
   });
 
   String? altNames;
@@ -36,6 +40,8 @@ class DogBreed {
   String? temperament;
   String? weightImperial;
   String? wikipediaUrl;
+  Image? image;
+  String? description;
 
   factory DogBreed.fromJson(Map<String, dynamic> json) => DogBreed(
         altNames: json["alt_names"],
@@ -55,6 +61,8 @@ class DogBreed {
         temperament: json["temperament"],
         weightImperial: json["weight_imperial"],
         wikipediaUrl: json["wikipedia_url"],
+        image: Image.fromJson(json["image"]),
+        description: json["description"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -75,5 +83,35 @@ class DogBreed {
         "temperament": temperament,
         "weight_imperial": weightImperial,
         "wikipedia_url": wikipediaUrl,
+        "image": image!.toJson(),
+        "description": description,
+      };
+}
+
+class Image {
+  Image({
+    this.id,
+    this.width,
+    this.height,
+    this.url,
+  });
+
+  String? id;
+  int? width;
+  int? height;
+  String? url;
+
+  factory Image.fromJson(Map<String, dynamic> json) => Image(
+        id: json["id"],
+        width: json["width"],
+        height: json["height"],
+        url: json["url"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "width": width,
+        "height": height,
+        "url": url,
       };
 }

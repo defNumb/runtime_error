@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:my_pets_app/blocs/breed-provider/breed_provider_cubit.dart';
 import 'package:my_pets_app/constants/app_constants.dart';
 
 import '../blocs/Auth/auth_bloc.dart';
@@ -37,11 +38,15 @@ class _HomePageState extends State<HomePage> {
             IconButton(
               onPressed: () {
                 Navigator.pushNamed(context, '/favorite_pets');
+                print(context.read<BreedProviderCubit>().state.catBreeds);
+                print(context.read<BreedProviderCubit>().state.dogBreeds);
               },
               icon: const Icon(Icons.favorite),
             ),
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushNamed(context, '/pet-dictionary');
+              },
               icon: const Icon(Icons.book),
             ),
           ],
