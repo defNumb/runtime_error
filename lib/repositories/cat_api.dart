@@ -39,7 +39,6 @@ class CatApiRepository {
         for (var item in jsonString) {
           catBreeds.add(CatBreed.fromJson(item));
         }
-        
         // Return the newly filled list
         return catBreeds;
       }
