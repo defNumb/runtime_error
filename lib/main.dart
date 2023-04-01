@@ -9,7 +9,6 @@ import 'package:my_pets_app/blocs/signin/signin_cubit.dart';
 import 'package:my_pets_app/blocs/signup/signup_cubit.dart';
 import 'package:my_pets_app/repositories/cat_api.dart';
 import 'package:my_pets_app/repositories/dog_api.dart';
-import 'package:my_pets_app/screens/cat_breed_details.dart';
 import 'package:my_pets_app/screens/cat_breeds.dart';
 import 'package:my_pets_app/screens/dog_breeds.dart';
 import 'package:my_pets_app/screens/home_page.dart';
