@@ -66,13 +66,19 @@ Database ERD
 # FIREBASE CRUD OPERATIONS
 
 - ACCESSING THE CURRENT USER ID
-        - FirebaseAuth.instance.currentUser.uid
+'''
+FirebaseAuth.instance.currentUser.uid
+
+'''
 
 - ACCESSING THE CURRENT USER EMAIL
         - FirebaseAuth.instance.currentUser.email
 
 - ACCESSING COLLECTIONS
-''' FirebaseFirestore.instance.collection('collectionName') ''' 
+''' 
+ FirebaseFirestore.instance.collection('collectionName') 
+''' 
+
 *Note: collectionName is the name of the collection you want to access*
 *we already have a global variable in the db_constants.dart file for the users collection*
 *you can access a collection within a user document*
