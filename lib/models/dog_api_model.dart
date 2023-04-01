@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 class DogBreed {
   DogBreed({
     this.altNames,
