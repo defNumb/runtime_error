@@ -21,6 +21,8 @@ dependencies:
   validators: ^3.0.0
   envied: ^0.3.0
   http: ^0.13.5
+  hydrated_bloc: ^9.1.0
+  path_provider: ^2.0.14
 
 dev_dependencies:
   flutter_test:

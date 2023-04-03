@@ -1,7 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart' as fbAuth;
-
-import '../constants/db_constants.dart';
 import '../models/custom_error.dart';
 import '../models/user_model.dart';
 
