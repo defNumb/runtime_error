@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_pets_app/utils/error_dialog.dart';
 import '../blocs/breed-provider/breed_provider_cubit.dart';
+import '../blocs/favorite_badge/favorite_badge_cubit.dart';
 import 'cat_breed_details.dart';
 
 class CatBreedsPage extends StatefulWidget {
@@ -40,7 +41,10 @@ class _CatBreedsPageState extends State<CatBreedsPage> {
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: GestureDetector(
-                        onTap: () {
+                        onTap: () async {
+                          await context
+                              .read<FavoriteBadgeCubit>()
+                              .checkFavorite(state.catBreeds[index].name);
                           Navigator.of(context).push(MaterialPageRoute(
                               builder: (context) => CatBreedDetailsPage(index: index)));
                         },
@@ -67,7 +71,11 @@ class _CatBreedsPageState extends State<CatBreedsPage> {
                                   height: 125,
                                   child: Padding(
                                     padding: const EdgeInsets.all(8.0),
-                                    child: Image.network(state.catBreeds[index].image!.url ?? ''),
+                                    child: state.catBreeds[index].image == null
+                                        ? Placeholder(
+                                            fallbackWidth: 50,
+                                          )
+                                        : Image.network(state.catBreeds[index].image!.url ?? ''),
                                   )),
                               Flexible(
                                   child: Text(state.catBreeds[index].name,
