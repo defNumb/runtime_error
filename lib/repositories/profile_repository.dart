@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart' as fbAuth;
+
+import '../constants/db_constants.dart';
 import '../models/custom_error.dart';
 import '../models/user_model.dart';
 
@@ -19,15 +21,21 @@ class ProfileRepository {
 
   Future<User> getProfile({required String uid}) async {
     try {
+      final DocumentSnapshot userDoc = await usersRef.doc(uid).get();
       // 2. Create a new final variable of type DocumentSnapshot named userDoc and assign it to await usersRef.doc(uid).get();
-      // 3. Create a new if block to check if userDoc.exists - DONE
-      // if (userDoc.exists) {
+      if (userDoc.exists) {
+        // 3. Create a new if block to check if userDoc.exists - DONE
+        final User currentUser = User.fromDoc(userDoc);
+        return currentUser;
+      } else {
+        return User.initialUser();
+      }
+
       // 4. Create a new final variable of type User named currentUser and assign it to User.fromDoc(userDoc);
       // 5. return currentUser;
       // } else {
       //   return User.initialUser();
       // }
-      return User.initialUser(); // DELETE THIS LINE
     } on FirebaseException catch (e) {
       throw CustomError(
         code: e.code,
