@@ -14,7 +14,7 @@ class ProfileRepository {
     required this.firebaseAuth,
   });
 
-  // TODO
+  // TODO: COMPLETE PROFILE REPOSITORY
   // 1. Create a new try/catch block - DONE
 
   Future<User> getProfile({required String uid}) async {

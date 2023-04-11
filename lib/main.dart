@@ -5,20 +5,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_pets_app/blocs/Auth/auth_bloc.dart';
 import 'package:my_pets_app/blocs/breed-provider/breed_provider_cubit.dart';
+import 'package:my_pets_app/blocs/favorite_list/favorite_list_cubit.dart';
 import 'package:my_pets_app/blocs/signin/signin_cubit.dart';
 import 'package:my_pets_app/blocs/signup/signup_cubit.dart';
 import 'package:my_pets_app/repositories/cat_api.dart';
 import 'package:my_pets_app/repositories/dog_api.dart';
+import 'package:my_pets_app/repositories/favorites_repository.dart';
 import 'package:my_pets_app/screens/cat_breeds.dart';
 import 'package:my_pets_app/screens/dog_breeds.dart';
 import 'package:my_pets_app/screens/home_page.dart';
+import 'package:my_pets_app/screens/mypets_page.dart';
 import 'package:my_pets_app/screens/petdict_page.dart';
 import 'package:my_pets_app/screens/signup_page.dart';
 import 'package:my_pets_app/screens/splash_screen.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'blocs/favorite_badge/favorite_badge_cubit.dart';
 import 'firebase_options.dart';
 import 'repositories/auth_repository.dart';
 import 'screens/pet_favorites.dart';
+import 'screens/profile_page.dart';
 import 'screens/signin_page.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
@@ -57,6 +62,12 @@ class MyApp extends StatelessWidget {
         RepositoryProvider<CatApiRepository>(
           create: (context) => CatApiRepository(),
         ),
+        RepositoryProvider<FavoriteRepository>(
+          create: (context) => FavoriteRepository(
+            firebaseFirestore: FirebaseFirestore.instance,
+            firebaseAuth: FirebaseAuth.instance,
+          ),
+        )
       ],
       child: MultiBlocProvider(
         providers: [
@@ -81,6 +92,18 @@ class MyApp extends StatelessWidget {
               catApiRepository: context.read<CatApiRepository>(),
             ),
           ),
+          // favorite provider
+          BlocProvider<FavoriteListCubit>(
+            create: (context) => FavoriteListCubit(
+              favoriteRepository: context.read<FavoriteRepository>(),
+            ),
+          ),
+          // favorite badge
+          BlocProvider<FavoriteBadgeCubit>(
+            create: (context) => FavoriteBadgeCubit(
+              favoriteRepository: context.read<FavoriteRepository>(),
+            ),
+          ),
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
@@ -98,6 +121,8 @@ class MyApp extends StatelessWidget {
             PetDictionaryPage.routeName: (context) => const PetDictionaryPage(),
             DogBreedsPage.routeName: (context) => const DogBreedsPage(),
             CatBreedsPage.routeName: (context) => const CatBreedsPage(),
+            UserProfilePage.routeName: (context) => const UserProfilePage(),
+            MyPetsPage.routeName: (context) => const MyPetsPage(),
           },
         ),
       ),

@@ -3,29 +3,37 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 
 class Favorite extends Equatable {
-  final String id;
+  final String name;
+  final String image;
+  final String type;
 
   Favorite({
-    required this.id,
+    required this.name,
+    required this.image,
+    required this.type,
   });
 
   factory Favorite.fromDoc(DocumentSnapshot favoriteDoc) {
     final favoriteData = favoriteDoc.data() as Map<String, dynamic>;
 
     return Favorite(
-      id: favoriteData['id'] ?? '',
+      name: favoriteData['name'] ?? '',
+      image: favoriteData['image'] ?? '',
+      type: favoriteData['type'] ?? '',
     );
   }
 
   // constructor to set information to firebase
   Map<String, dynamic> toDoc(Favorite favorite) {
     return <String, dynamic>{
-      'id': favorite.id,
+      'name': favorite.name,
+      'image': favorite.image,
+      'type': favorite.type,
     };
   }
 
   @override
-  List<Object> get props => [id];
+  List<Object> get props => [name, image, type];
 
   @override
   bool get stringify => true;

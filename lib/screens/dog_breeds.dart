@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:my_pets_app/blocs/favorite_badge/favorite_badge_cubit.dart';
 
 import '../blocs/breed-provider/breed_provider_cubit.dart';
 import 'dog_breed_details.dart';
@@ -33,7 +34,11 @@ class _DogBreedsPageState extends State<DogBreedsPage> {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: GestureDetector(
-                    onTap: () {
+                    onTap: () async {
+                      // check if breed is favorited
+                      await context
+                          .read<FavoriteBadgeCubit>()
+                          .checkFavorite(state.dogBreeds[index].name);
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => DogBreedDetailsPage(index: index)));
                     },
