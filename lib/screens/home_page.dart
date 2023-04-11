@@ -1,9 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:my_pets_app/blocs/breed-provider/breed_provider_cubit.dart';
 import 'package:my_pets_app/constants/app_constants.dart';
 
 import '../blocs/Auth/auth_bloc.dart';
+import '../blocs/favorite_list/favorite_list_cubit.dart';
 
 class HomePage extends StatefulWidget {
   static const String routeName = '/home_page';
@@ -28,18 +29,24 @@ class _HomePageState extends State<HomePage> {
           // actions with 3 buttons to visit the profile page, pet dictionary page,and favorite pets page
           actions: [
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushNamed(context, '/user_profile');
+              },
               icon: const Icon(Icons.person),
             ),
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushNamed(context, '/my_pets');
+              },
               icon: const Icon(Icons.pets),
             ),
             IconButton(
               onPressed: () {
+                // read favorite list
+                context
+                    .read<FavoriteListCubit>()
+                    .getFavorites(uid: FirebaseAuth.instance.currentUser!.uid);
                 Navigator.pushNamed(context, '/favorite_pets');
-                print(context.read<BreedProviderCubit>().state.catBreeds);
-                print(context.read<BreedProviderCubit>().state.dogBreeds);
               },
               icon: const Icon(Icons.favorite),
             ),
@@ -59,15 +66,61 @@ class _HomePageState extends State<HomePage> {
                   height: 50,
                 ),
                 //
-                //  TODO:    TASK 1
+                //  TODO: COMPLETE DESIGN OF HOMEPAGE
                 // INSTRUCTIONS TASK # 1
                 // In the home page, create a text widget that says "Home Page" - already done
                 // create another text widget that says "Welcome, ${state.user.email}"
                 // and add a paragraph widget that says "This team runtime_error project app.. etc etc"
                 //
                 //
-                const Center(
-                  child: Text('Home Page'),
+                Title(
+                    color: Colors.green,
+                    child: Text(
+                      'My Pet Dictionary',
+                      style: TextStyle(
+                        fontSize: 30,
+                        fontFamily: 'Quicksand',
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
+                    )),
+                Title(
+                  color: Colors.black,
+                  child: Text('Welcome, ${state.user!.email}'),
+                ),
+                const SizedBox(
+                  height: 50,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    // two containers with rounded corners and 100x100 size
+                    Container(
+                      width: 100,
+                      height: 100,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: const Center(
+                        child: Text('1'),
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 20,
+                    ),
+                    Container(
+                      width: 100,
+                      height: 100,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: const Center(
+                        child: Text('2'),
+                      ),
+                    ),
+                  ],
                 ),
                 //
                 // END OF TASK # 1
