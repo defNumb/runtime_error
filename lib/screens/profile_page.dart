@@ -20,6 +20,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
         ),
       ),
       body: const Center(
+        // TODO: NIKKI COMPLETE THIS PAGE
         child: Text('User Profile Page'),
       ),
     );
