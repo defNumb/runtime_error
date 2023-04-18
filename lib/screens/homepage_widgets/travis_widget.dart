@@ -11,6 +11,8 @@ class TravisWidget extends StatelessWidget {
       color: Colors.green,
       child: Center(
         child: Text('Travis Widget'),
+        //Get 5 random pets from the list of pets and pull up a picture every time
+        //they come back to the home page, showcasing "popular" animals
       ),
     );
   }
