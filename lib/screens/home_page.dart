@@ -2,6 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_pets_app/constants/app_constants.dart';
+import 'package:my_pets_app/screens/homepage_widgets/sam_widget.dart';
+import 'package:my_pets_app/screens/homepage_widgets/seth_widget.dart';
+import 'package:my_pets_app/screens/homepage_widgets/travis_widget.dart';
 
 import '../blocs/Auth/auth_bloc.dart';
 import '../blocs/favorite_list/favorite_list_cubit.dart';
@@ -60,7 +63,7 @@ class _HomePageState extends State<HomePage> {
         ),
         body: BlocBuilder<AuthBloc, AuthState>(
           builder: (context, state) {
-            return Column(
+            return ListView(
               children: [
                 const SizedBox(
                   height: 50,
@@ -91,49 +94,24 @@ class _HomePageState extends State<HomePage> {
                 const SizedBox(
                   height: 50,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    // two containers with rounded corners and 100x100 size
-                    Container(
-                      width: 100,
-                      height: 100,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: const Center(
-                        child: Text('1'),
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 20,
-                    ),
-                    Container(
-                      width: 100,
-                      height: 100,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: const Center(
-                        child: Text('2'),
-                      ),
-                    ),
-                  ],
-                ),
+
                 //
-                // END OF TASK # 1
                 //
+                SethWidget(),
+                SamWidget(),
+                TravisWidget(),
                 // sign out green button
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.green,
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.green,
+                    ),
+                    onPressed: () {
+                      context.read<AuthBloc>().add(SignoutRequestedEvent());
+                    },
+                    child: const Text('Sign Out'),
                   ),
-                  onPressed: () {
-                    context.read<AuthBloc>().add(SignoutRequestedEvent());
-                  },
-                  child: const Text('Sign Out'),
                 ),
               ],
             );
