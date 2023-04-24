@@ -32,4 +32,20 @@ class SignupPetCubit extends Cubit<SignupPetState> {
       );
     }
   }
+
+  // delete pet
+  Future<void> deletePet({required String petId}) async {
+    emit(state.copyWith(signupPetStatus: SignupPetStatus.submitting));
+    try {
+      await petRepository.removePet(petId);
+      emit(state.copyWith(signupPetStatus: SignupPetStatus.success));
+    } on CustomError catch (e) {
+      emit(
+        state.copyWith(
+          signupPetStatus: SignupPetStatus.error,
+          error: e,
+        ),
+      );
+    }
+  }
 }

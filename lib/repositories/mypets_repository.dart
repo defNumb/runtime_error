@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart' as fbAuth;
+import 'package:firebase_auth/firebase_auth.dart';
 import '../constants/db_constants.dart';
 import '../models/custom_error.dart';
 import '../models/pet_model.dart';
@@ -84,7 +85,7 @@ class MyPetsRepository {
       var randomDoc = petDoc.doc();
 
       // Create full document with 'pet' and the new ID and push it to firebase.
-      await petDoc.doc(uid).set(
+      await petDoc.doc(randomDoc.id).set(
         {
           'id': randomDoc.id,
           'name': pet.name,
@@ -116,16 +117,14 @@ class MyPetsRepository {
     }
   } // End of addPet
 
-  Future<void> removePet(petID) async {
+  Future<void> removePet(pid) async {
     try {
       // Get the current users unique ID.
       final uid = firebaseAuth.currentUser!.uid;
 
       // Retrieve firebase record (collection) of that user's 'pets'.
-      final QuerySnapshot petList = await usersRef.doc(uid).collection('pets').get();
-
-      // Remove the pet from firebase with the ID value of 'petID'.
-      petList.docChanges.remove(petID);
+      final petDoc = await usersRef.doc(uid).collection('pets').doc(pid);
+      await petDoc.delete();
     } on FirebaseException catch (e) {
       throw CustomError(
         code: e.code,
@@ -141,3 +140,37 @@ class MyPetsRepository {
     }
   } // End of removePet
 } // End of class MyPetsRepository
+
+Future updatePet(Pet pet) async {
+  try {
+    final petDoc =
+        await usersRef.doc(FirebaseAuth.instance.currentUser!.uid).collection('pets').doc(pet.id);
+
+    await petDoc.update({
+      'id': pet.id,
+      'name': pet.name,
+      'icon': pet.icon,
+      'species': pet.species,
+      'breed': pet.breed,
+      'breed2': pet.breed2,
+      'birthday': pet.birthDay,
+      'weight': pet.weight,
+      'healthConditions': pet.healthConditions,
+      'neutered': pet.neutered,
+      'background': pet.backgroundImage
+    });
+    throw 'Oops try again!';
+  } on FirebaseException catch (e) {
+    throw CustomError(
+      code: e.code,
+      message: e.message!,
+      plugin: e.plugin,
+    );
+  } catch (e) {
+    throw CustomError(
+      code: 'Exception',
+      message: e.toString(),
+      plugin: 'flutter_error/server_error.updatePet',
+    );
+  }
+}
