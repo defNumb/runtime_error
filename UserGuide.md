@@ -8,8 +8,9 @@ A new Flutter project, by Team Runtime_error.
 - Travis Russell
 - Nikki Liu
 
-#User Guide
+## User Guide
 Profile Page
 - Users are able to edit and save information
 - Profile Picture, First Name, Last Name, Phone Number, E-mail Address
 - Users are able to Sign Out
+
