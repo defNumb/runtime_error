@@ -1,17 +1,97 @@
-import 'package:flutter/material.dart';
+import 'dart:math';
 
-class SamWidget extends StatelessWidget {
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../blocs/breed-provider/breed_provider_cubit.dart';
+
+class SamWidget extends StatefulWidget {
   const SamWidget({super.key});
 
   @override
+  State<SamWidget> createState() => _SamWidgetState();
+}
+
+class _SamWidgetState extends State<SamWidget> {
+  // get dog breeds from the cubit
+  @override
+  void initState() {
+    super.initState();
+    _getDogBreeds();
+  }
+
+  // get dog breeds from the cubit
+  void _getDogBreeds() {
+    context.read<BreedProviderCubit>().getDogBreeds();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 100,
-      width: 100,
-      color: Colors.blue,
-      child: Center(
-        child: Text('Sam Widget'),
-      ),
+    return BlocBuilder<BreedProviderCubit, BreedProviderState>(
+      builder: (context, state) {
+        // if the state is loading, show a loading indicator
+        if (state.status == BreedProviderStatus.loading) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+        final randomNumber = Random().nextInt(50);
+
+        return Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: Column(
+            children: [
+              // title : Pet of the week
+              // this widget will be a container with a title and a picture of a random
+              // pet from the cat or dog api
+              Text(
+                'Most Liked',
+                style:
+                    TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.grey[800]),
+              ),
+
+              // size box
+              const SizedBox(
+                height: 10,
+              ),
+              // container with a picture of a random pet
+              Container(
+                height: 250,
+                width: 300,
+                color: Colors.blue,
+                // child will contain a picture of a random pet
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    children: [
+                      Container(
+                        height: 150,
+                        width: 150,
+                        child: Image.network(state.dogBreeds[randomNumber].image!.url ?? '',
+                            fit: BoxFit.cover),
+                      ),
+                      // size box
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      // pet name
+                      Text(
+                        state.dogBreeds[randomNumber].name,
+                        style: const TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
+                      // pet breed
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }
