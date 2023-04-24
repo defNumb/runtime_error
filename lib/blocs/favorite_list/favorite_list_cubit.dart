@@ -55,7 +55,7 @@ class FavoriteListCubit extends Cubit<FavoriteListState> {
   Future<void> removeFavorite({required Favorite favorite}) async {
     emit(state.copyWith(status: FavoriteListStatus.loading));
     try {
-      await favoriteRepository.removeFavorite(favorite);
+      await favoriteRepository.removeFavorite(favorite.name);
       final favoriteList = await favoriteRepository.getFavorites();
       emit(
         state.copyWith(

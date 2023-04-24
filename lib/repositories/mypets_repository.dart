@@ -21,8 +21,6 @@ class MyPetsRepository {
     required this.firebaseAuth,
   });
 
-
-
   Future<List<Pet>> getPets() async {
     try {
       // Get the current users unique ID.
@@ -76,58 +74,70 @@ class MyPetsRepository {
 
   Future<void> addPet(Pet pet) async {
     try {
-        // Get the current users unique ID.
-        final uid = firebaseAuth.currentUser!.uid;
+      // Get the current users unique ID.
+      final uid = firebaseAuth.currentUser!.uid;
 
-        // Pull up the firebase collection tied to the current users ID.
-        final petDoc = await usersRef.doc(uid).collection('pets');
+      // Pull up the firebase collection tied to the current users ID.
+      final petDoc = await usersRef.doc(uid).collection('pets');
 
-        // Generate partial new document within that collection with a brand new ID.
-        var randomDoc = petDoc.doc();
+      // Generate partial new document within that collection with a brand new ID.
+      var randomDoc = petDoc.doc();
 
-        // Create full document with 'pet' and the new ID and push it to firebase.
-        await usersRef.doc(uid).set(pet.toDoc(pet, randomDoc.id));
-
+      // Create full document with 'pet' and the new ID and push it to firebase.
+      await petDoc.doc(uid).set(
+        {
+          'id': randomDoc.id,
+          'name': pet.name,
+          'icon': pet.icon,
+          'species': pet.species,
+          'breed': pet.breed,
+          'breed2': pet.breed2,
+          'gender': pet.gender,
+          'birthDay': pet.birthDay,
+          'weight': pet.weight,
+          'healthConditions': pet.healthConditions,
+          'neutered': pet.neutered,
+          'backgroundImage': pet.backgroundImage,
+          'referenceId': uid,
+        },
+      );
     } on FirebaseException catch (e) {
-        throw CustomError(
-          code: e.code,
-          message: e.message!,
-          plugin: e.plugin,
-        );
+      throw CustomError(
+        code: e.code,
+        message: e.message!,
+        plugin: e.plugin,
+      );
     } catch (e) {
-        throw CustomError(
-          code: 'Exception',
-          message: e.toString(),
-          plugin: 'flutter_error/server_error.getPets',
-        );
+      throw CustomError(
+        code: 'Exception',
+        message: e.toString(),
+        plugin: 'flutter_error/server_error.getPets',
+      );
     }
   } // End of addPet
 
-
-
   Future<void> removePet(petID) async {
     try {
-        // Get the current users unique ID.
-        final uid = firebaseAuth.currentUser!.uid;
+      // Get the current users unique ID.
+      final uid = firebaseAuth.currentUser!.uid;
 
-        // Retrieve firebase record (collection) of that user's 'pets'.
-        final QuerySnapshot petList = await usersRef.doc(uid).collection('pets').get();
+      // Retrieve firebase record (collection) of that user's 'pets'.
+      final QuerySnapshot petList = await usersRef.doc(uid).collection('pets').get();
 
-        // Remove the pet from firebase with the ID value of 'petID'.
-        petList.docChanges.remove(petID);
-
+      // Remove the pet from firebase with the ID value of 'petID'.
+      petList.docChanges.remove(petID);
     } on FirebaseException catch (e) {
-        throw CustomError(
-          code: e.code,
-          message: e.message!,
-          plugin: e.plugin,
-        );
+      throw CustomError(
+        code: e.code,
+        message: e.message!,
+        plugin: e.plugin,
+      );
     } catch (e) {
-        throw CustomError(
-          code: 'Exception',
-          message: e.toString(),
-          plugin: 'flutter_error/server_error.getPets',
-        );
+      throw CustomError(
+        code: 'Exception',
+        message: e.toString(),
+        plugin: 'flutter_error/server_error.getPets',
+      );
     }
   } // End of removePet
 } // End of class MyPetsRepository

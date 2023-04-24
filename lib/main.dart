@@ -11,6 +11,8 @@ import 'package:my_pets_app/blocs/signup/signup_cubit.dart';
 import 'package:my_pets_app/repositories/cat_api.dart';
 import 'package:my_pets_app/repositories/dog_api.dart';
 import 'package:my_pets_app/repositories/favorites_repository.dart';
+import 'package:my_pets_app/repositories/mypets_repository.dart';
+import 'package:my_pets_app/repositories/profile_repository.dart';
 import 'package:my_pets_app/screens/cat_breeds.dart';
 import 'package:my_pets_app/screens/dog_breeds.dart';
 import 'package:my_pets_app/screens/home_page.dart';
@@ -20,6 +22,9 @@ import 'package:my_pets_app/screens/signup_page.dart';
 import 'package:my_pets_app/screens/splash_screen.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'blocs/favorite_badge/favorite_badge_cubit.dart';
+import 'blocs/pet_list/pet_list_cubit.dart';
+import 'blocs/signup_pet/signup_pet_cubit.dart';
+import 'blocs/user_profile/user_profile_cubit.dart';
 import 'firebase_options.dart';
 import 'repositories/auth_repository.dart';
 import 'screens/pet_favorites.dart';
@@ -67,7 +72,21 @@ class MyApp extends StatelessWidget {
             firebaseFirestore: FirebaseFirestore.instance,
             firebaseAuth: FirebaseAuth.instance,
           ),
-        )
+        ),
+        // profile reposityory
+        RepositoryProvider<ProfileRepository>(
+          create: (context) => ProfileRepository(
+            firebaseFirestore: FirebaseFirestore.instance,
+            firebaseAuth: FirebaseAuth.instance,
+          ),
+        ),
+        // pet repository
+        RepositoryProvider<MyPetsRepository>(
+          create: (context) => MyPetsRepository(
+            firebaseFirestore: FirebaseFirestore.instance,
+            firebaseAuth: FirebaseAuth.instance,
+          ),
+        ),
       ],
       child: MultiBlocProvider(
         providers: [
@@ -102,6 +121,24 @@ class MyApp extends StatelessWidget {
           BlocProvider<FavoriteBadgeCubit>(
             create: (context) => FavoriteBadgeCubit(
               favoriteRepository: context.read<FavoriteRepository>(),
+            ),
+          ),
+          // user profile cubit
+          BlocProvider<UserProfileCubit>(
+            create: (context) => UserProfileCubit(
+              profileRepository: context.read<ProfileRepository>(),
+            ),
+          ),
+          // pet list cubit
+          BlocProvider<PetListCubit>(
+            create: (context) => PetListCubit(
+              petRepository: context.read<MyPetsRepository>(),
+            ),
+          ),
+          // add pet cubit
+          BlocProvider<SignupPetCubit>(
+            create: (context) => SignupPetCubit(
+              petRepository: context.read<MyPetsRepository>(),
             ),
           ),
         ],
