@@ -94,7 +94,7 @@ class FavoriteRepository {
   }
 
   // create a new method named removeFavorite() that takes a String named favoriteId as a parameter
-  Future<void> removeFavorite(favoriteId) async {
+  Future<void> removeFavorite(String favoriteId) async {
     try {
       final uid = firebaseAuth.currentUser!.uid;
       await usersRef.doc(uid).collection('favorites').doc(favoriteId).delete();
