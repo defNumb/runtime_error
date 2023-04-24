@@ -1,7 +1,11 @@
 //import material
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_pets_app/constants/app_constants.dart';
 
+import '../blocs/pet_list/pet_list_cubit.dart';
+import '../blocs/signup_pet/signup_pet_cubit.dart';
 import '../models/pet_model.dart';
 
 class AddPetScreen extends StatefulWidget {
@@ -17,10 +21,9 @@ class _AddPetScreenState extends State<AddPetScreen> {
   // THIS SETS UP VARIABLES FOR THE FORM TO SUBMIT TO THE DATABASE
   //
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final TextEditingController _passwordController = TextEditingController();
+
   AutovalidateMode _autoValidateMode = AutovalidateMode.disabled;
   String? _name,
-      _icon,
       _species,
       _breed,
       _breed2,
@@ -41,23 +44,23 @@ class _AddPetScreenState extends State<AddPetScreen> {
     form.save();
     Pet newPet = Pet(
       id: '',
-      icon: _icon ?? 'assets/images/dog_icon.png',
+      icon: _species == 'Dog' ? 'assets/images/dog_icon.png' : 'assets/images/cat_icon.png',
       name: _name!,
       breed: _breed ?? 'Perro',
       breed2: _breed2 ?? '',
       species: _species!,
       gender: _gender ?? '',
-      weight: _weight!,
-      birthDay: _birthDay!,
+      weight: _weight ?? '',
+      birthDay: _birthDay ?? '',
       healthConditions: '',
       neutered: _neutered ?? 'No',
       backgroundImage: _backgroundImage ?? '',
       referenceId: '',
     );
-    // context
-    //     .read<SignupPetCubit>()
-    //     .createPet(pet: newPet, uid: FirebaseAuth.instance.currentUser!.uid);
-    // context.read<PetListCubit>().updatePetList(uid: FirebaseAuth.instance.currentUser!.uid);
+    context
+        .read<SignupPetCubit>()
+        .createPet(pet: newPet, uid: FirebaseAuth.instance.currentUser!.uid);
+    context.read<PetListCubit>().updatePetList(uid: FirebaseAuth.instance.currentUser!.uid);
     Navigator.of(context).pop();
   }
 
@@ -163,6 +166,14 @@ class _AddPetScreenState extends State<AddPetScreen> {
                   ),
                   // END OF SPECIES FIELD
                   //
+                ),
+                // submit button
+                Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: ElevatedButton(
+                    onPressed: _submit,
+                    child: const Text('Submit'),
+                  ),
                 ),
               ],
             ),

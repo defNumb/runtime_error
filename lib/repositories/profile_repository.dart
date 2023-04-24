@@ -29,12 +29,6 @@ class ProfileRepository {
       } else {
         return User.initialUser();
       }
-
-      // 4. Create a new final variable of type User named currentUser and assign it to User.fromDoc(userDoc);
-      // 5. return currentUser;
-      // } else {
-      //   return User.initialUser();
-      // }
     } on FirebaseException catch (e) {
       throw CustomError(
         code: e.code,
@@ -46,6 +40,41 @@ class ProfileRepository {
         code: 'Exception',
         message: e.toString(),
         plugin: 'flutter_error/server_error.getProfile',
+      );
+    }
+  }
+
+// update user info
+  Future<void> updateProfile(
+    String uid,
+    String name,
+    String lastName,
+    String phoneNumber,
+    String email,
+  ) async {
+    try {
+      // check to see if the email is different from the current user
+      final fbAuth.User? user = firebaseAuth.currentUser;
+      if (user!.email != email) {
+        await user.updateEmail(email);
+      }
+      await usersRef.doc(uid).update({
+        'name': name,
+        'last_name': lastName,
+        'phone': phoneNumber,
+        'email': email,
+      });
+    } on FirebaseException catch (e) {
+      throw CustomError(
+        code: e.code,
+        message: e.message!,
+        plugin: e.plugin,
+      );
+    } catch (e) {
+      throw CustomError(
+        code: 'Exception',
+        message: e.toString(),
+        plugin: 'flutter_error/server_error.updateProfile',
       );
     }
   }
