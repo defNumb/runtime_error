@@ -76,7 +76,8 @@ class _HomePageState extends State<HomePage> {
                 // and add a paragraph widget that says "This team runtime_error project app.. etc etc"
                 //
                 //
-                Title(
+                Center(
+                  child: Title(
                     color: Colors.green,
                     child: Text(
                       'My Pet Dictionary',
@@ -84,12 +85,16 @@ class _HomePageState extends State<HomePage> {
                         fontSize: 30,
                         fontFamily: 'Quicksand',
                         fontWeight: FontWeight.bold,
-                        color: Colors.black,
+                        color: Colors.teal,
                       ),
-                    )),
-                Title(
-                  color: Colors.black,
-                  child: Text('Welcome, ${state.user!.email}'),
+                    ),
+                  ),
+                ),
+                Center(
+                  child: Title(
+                    color: Colors.black,
+                    child: Text('Welcome, ${state.user!.email}'),
+                  ),
                 ),
                 const SizedBox(
                   height: 50,
@@ -98,21 +103,16 @@ class _HomePageState extends State<HomePage> {
                 //
                 //
                 SethWidget(),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: const Divider(
+                    color: Colors.grey,
+                    thickness: 1,
+                  ),
+                ),
                 SamWidget(),
                 TravisWidget(),
                 // sign out green button
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.green,
-                    ),
-                    onPressed: () {
-                      context.read<AuthBloc>().add(SignoutRequestedEvent());
-                    },
-                    child: const Text('Sign Out'),
-                  ),
-                ),
               ],
             );
           },

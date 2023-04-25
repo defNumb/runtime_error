@@ -5,14 +5,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../blocs/breed-provider/breed_provider_cubit.dart';
 
-class SamWidget extends StatefulWidget {
-  const SamWidget({super.key});
+class SethWidget extends StatefulWidget {
+  const SethWidget({super.key});
 
   @override
-  State<SamWidget> createState() => _SamWidgetState();
+  State<SethWidget> createState() => _SethWidgetState();
 }
 
-class _SamWidgetState extends State<SamWidget> {
+class _SethWidgetState extends State<SethWidget> {
   // get dog breeds from the cubit
   @override
   void initState() {
@@ -36,7 +36,6 @@ class _SamWidgetState extends State<SamWidget> {
           );
         }
         final randomNumber = Random().nextInt(50);
-
         return Padding(
           padding: const EdgeInsets.all(15.0),
           child: Column(
@@ -45,7 +44,7 @@ class _SamWidgetState extends State<SamWidget> {
               // this widget will be a container with a title and a picture of a random
               // pet from the cat or dog api
               Text(
-                'Most Liked',
+                'Pet of the Day',
                 style:
                     TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.grey[800]),
               ),
@@ -56,9 +55,9 @@ class _SamWidgetState extends State<SamWidget> {
               ),
               // container with a picture of a random pet
               Container(
-                height: 250,
+                height: 200,
                 width: 300,
-                color: Colors.blue,
+                color: Colors.red,
                 // child will contain a picture of a random pet
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
