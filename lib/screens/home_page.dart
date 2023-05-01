@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:my_pets_app/blocs/user_profile/user_profile_cubit.dart';
 import 'package:my_pets_app/constants/app_constants.dart';
 import 'package:my_pets_app/screens/homepage_widgets/sam_widget.dart';
 import 'package:my_pets_app/screens/homepage_widgets/seth_widget.dart';
@@ -61,7 +62,7 @@ class _HomePageState extends State<HomePage> {
             ),
           ],
         ),
-        body: BlocBuilder<AuthBloc, AuthState>(
+        body: BlocBuilder<UserProfileCubit, UserProfileState>(
           builder: (context, state) {
             return ListView(
               children: [
@@ -69,13 +70,7 @@ class _HomePageState extends State<HomePage> {
                   height: 50,
                 ),
                 //
-                //  TODO: COMPLETE DESIGN OF HOMEPAGE
-                // INSTRUCTIONS TASK # 1
-                // In the home page, create a text widget that says "Home Page" - already done
-                // create another text widget that says "Welcome, ${state.user.email}"
-                // and add a paragraph widget that says "This team runtime_error project app.. etc etc"
-                //
-                //
+
                 Center(
                   child: Title(
                     color: Colors.green,
@@ -93,7 +88,7 @@ class _HomePageState extends State<HomePage> {
                 Center(
                   child: Title(
                     color: Colors.black,
-                    child: Text('Welcome, ${state.user!.email}'),
+                    child: Text('Welcome, ${state.user.name}'),
                   ),
                 ),
                 const SizedBox(
