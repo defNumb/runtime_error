@@ -58,6 +58,8 @@ In order to connect the project to the database (Firebase), you will need to ins
 
 ## Documentation
 
+- [User Guide](UserGuide.md)
+
 Database ERD
 
 ![Database entity relationship diagram](documentation/ERD.png?raw=true "Database ERD")
