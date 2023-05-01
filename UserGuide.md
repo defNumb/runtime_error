@@ -1,4 +1,3 @@
-# webpage1
 # my_pets_app
 
 A new Flutter project, by Team Runtime_error.
@@ -10,9 +9,14 @@ A new Flutter project, by Team Runtime_error.
 - Nikki Liu
 
 ## User Guide
+
+**Creating an account**
+- Users can enter email and password to login
+- Users can sign up and will be asked to enter contact information
+
 **Home Page**
-- Shows *'Pet of the Day'* with breed name and photo of the breed
-- Shows *'Most Liked'* breed with name and photo of breed
+- Display *'Pet of the Day'* with breed name and photo of the breed
+- Display *'Most Liked'* breed with name and photo of breed
 
 **Profile Page**
 - Users are able to *edit* and *save* information
@@ -31,4 +35,7 @@ A new Flutter project, by Team Runtime_error.
 - Users are able to delete liked pet from list
 
 **Pet Dictionary**
-- 
+- Users are able to choose between Dog and Cat
+- After choosing, dictionary will display a photo of breed and name
+- Display breed temperament, life span, origin
+- Users are able to favorite pet breed
