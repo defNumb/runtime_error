@@ -2,8 +2,13 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
+import 'package:my_pets_app/models/custom_error.dart';
+import 'package:my_pets_app/utils/error_dialog.dart';
+//import app constants
+import '../../constants/app_constants.dart';
 import '../../blocs/breed-provider/breed_provider_cubit.dart';
+// url launcher
+import 'package:url_launcher/url_launcher.dart';
 
 class SamWidget extends StatefulWidget {
   const SamWidget({super.key});
@@ -45,7 +50,7 @@ class _SamWidgetState extends State<SamWidget> {
               // this widget will be a container with a title and a picture of a random
               // pet from the cat or dog api
               Text(
-                'Most Liked',
+                'Most Liked Dog Breeds',
                 style:
                     TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.grey[800]),
               ),
@@ -58,10 +63,13 @@ class _SamWidgetState extends State<SamWidget> {
               Container(
                 height: 250,
                 width: 300,
-                color: Colors.blue,
+                decoration: BoxDecoration(
+                  color: secondaryColor,
+                  borderRadius: BorderRadius.circular(20),
+                ),
                 // child will contain a picture of a random pet
                 child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(25.0),
                   child: Column(
                     children: [
                       Container(
@@ -75,13 +83,43 @@ class _SamWidgetState extends State<SamWidget> {
                         height: 10,
                       ),
                       // pet name
-                      Text(
-                        state.dogBreeds[randomNumber].name,
-                        style: const TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Text(
+                            state.dogBreeds[randomNumber].name,
+                            style: const TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
+                          InkWell(
+                            onTap: () async {
+                              // try to launch the url
+                              if (state.dogBreeds[randomNumber].wikipediaUrl == null) {
+                                errorDialog(context,
+                                    CustomError(message: 'No wikipedia url for this breed'));
+                                return;
+                              }
+                              try {
+                                await launchUrl(
+                                    // if android, use the android url else use the ios url
+                                    Uri.parse(state.dogBreeds[randomNumber].wikipediaUrl!));
+                              } catch (e) {
+                                errorDialog(context, CustomError(message: e.toString()));
+                              }
+                            },
+                            child: const Text(
+                              'Learn More',
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                       // pet breed
                     ],

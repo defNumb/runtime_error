@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_pets_app/blocs/breed-provider/breed_provider_cubit.dart';
+import 'package:my_pets_app/constants/app_constants.dart';
 
 class PetDictionaryPage extends StatefulWidget {
   static const String routeName = '/pet-dictionary';
@@ -14,6 +15,7 @@ class _PetDictionaryPageState extends State<PetDictionaryPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: primaryColor,
       appBar: AppBar(
         title: const Text('Pet Dictionary'),
       ),
@@ -26,7 +28,7 @@ class _PetDictionaryPageState extends State<PetDictionaryPage> {
               width: 300,
               height: 200,
               decoration: BoxDecoration(
-                color: Colors.blue,
+                color: tertiaryColor,
                 borderRadius: BorderRadius.circular(20),
               ),
               // child will be a button to a new page with a list of dog breeds.
@@ -43,7 +45,7 @@ class _PetDictionaryPageState extends State<PetDictionaryPage> {
               width: 300,
               height: 200,
               decoration: BoxDecoration(
-                color: Colors.blue,
+                color: secondaryColor,
                 borderRadius: BorderRadius.circular(20),
               ),
               child: TextButton(

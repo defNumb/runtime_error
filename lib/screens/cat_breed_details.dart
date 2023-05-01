@@ -2,6 +2,7 @@
 import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:my_pets_app/constants/app_constants.dart';
 
 import '../blocs/breed-provider/breed_provider_cubit.dart';
 import '../blocs/favorite_badge/favorite_badge_cubit.dart';
@@ -24,6 +25,7 @@ class _CatBreedDetailsPageState extends State<CatBreedDetailsPage> {
     return BlocBuilder<BreedProviderCubit, BreedProviderState>(
       builder: (context, state) {
         return Scaffold(
+          backgroundColor: secondaryColor,
           appBar: AppBar(
             title: Text(state.catBreeds[widget.index].name),
           ),

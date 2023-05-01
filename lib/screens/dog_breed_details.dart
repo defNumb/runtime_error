@@ -2,6 +2,7 @@
 import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:my_pets_app/constants/app_constants.dart';
 import 'package:my_pets_app/utils/error_dialog.dart';
 import '../blocs/breed-provider/breed_provider_cubit.dart';
 import '../blocs/favorite_badge/favorite_badge_cubit.dart';
@@ -52,6 +53,7 @@ class _DogBreedDetailsPageState extends State<DogBreedDetailsPage> {
           );
         }
         return Scaffold(
+          backgroundColor: primaryColor,
           appBar: AppBar(
             title: Text(state.dogBreeds[widget.index].name),
           ),
