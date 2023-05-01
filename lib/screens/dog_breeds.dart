@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_pets_app/blocs/favorite_badge/favorite_badge_cubit.dart';
+import 'package:my_pets_app/constants/app_constants.dart';
 
 import '../blocs/breed-provider/breed_provider_cubit.dart';
 import 'dog_breed_details.dart';
@@ -17,6 +18,7 @@ class _DogBreedsPageState extends State<DogBreedsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: primaryColor,
       appBar: AppBar(
         title: const Text('Dog Breeds'),
       ),
@@ -47,7 +49,7 @@ class _DogBreedsPageState extends State<DogBreedsPage> {
                       width: 350,
                       // color mustard and round borders with shadow
                       decoration: BoxDecoration(
-                        color: Colors.yellow[300],
+                        color: quaternaryColor,
                         borderRadius: BorderRadius.circular(20),
                         boxShadow: [
                           BoxShadow(

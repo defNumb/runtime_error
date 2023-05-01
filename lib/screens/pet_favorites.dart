@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../blocs/favorite_list/favorite_list_cubit.dart';
+import '../models/favorite_model.dart';
 
 class PetFavoritesPage extends StatefulWidget {
   static const String routeName = '/favorite_pets';
@@ -43,9 +44,19 @@ class _PetFavoritesPageState extends State<PetFavoritesPage> {
               child: Text('No favorites yet'),
             );
           }
+          // create two lists one for favorited dogs and one for favorited cats
+
           return ListView.builder(
             itemCount: state.favorites.length,
             itemBuilder: (context, index) {
+              List<Favorite> dogFavorites = state.favorites.where((element) {
+                return element.type == 'Dog';
+              }).toList();
+
+              List<Favorite> catFavorites = state.favorites.where((element) {
+                return element.type == 'Cat';
+              }).toList();
+
               return GestureDetector(
                 onTap: () {
                   // navigate to pet details page
